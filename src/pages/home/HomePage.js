@@ -92,9 +92,6 @@ class HomePage extends Component {
         imageUrl : "http://simpanan.danaarta.net/mobileapp/images/f_cikupa.png?random_number=" + hashImage
       },
       {
-        imageUrl : "http://simpanan.danaarta.net/mobileapp/images/f_freetrend.png?random_number=" + hashImage
-      },
-      {
         imageUrl : "http://simpanan.danaarta.net/mobileapp/images/f_jatake.png?random_number=" + hashImage
       },
       {
