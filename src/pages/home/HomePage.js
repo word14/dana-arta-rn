@@ -105,9 +105,7 @@ class HomePage extends Component {
         imageUrl : "end_page"
       }
     ];
-    console.log(this.state.imageUrl);
     const waUrl = 'http://api.whatsapp.com/send?phone=6285218170602';
-    console.log(waUrl);
     return (
       <View>
         <View>
