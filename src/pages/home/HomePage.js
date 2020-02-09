@@ -5,9 +5,9 @@ import {
   View,
   Text,
   Dimensions,
-  Image,
   TouchableOpacity,
-  Linking
+  Linking,
+  Image
 }                                   from "react-native";
 import PropTypes                    from "prop-types";
 import HomePresenter                from "./HomePresenter";
@@ -17,7 +17,9 @@ import lang                         from "~/lang";
 import Carousel                     from "react-native-snap-carousel";
 import ImageView                    from "react-native-image-view";
 import waIcon                       from "@assets/wa-icon.png";
-import InputFormComponent      from "~/component/inputform/InputFormComponent";
+import InputFormComponent           from "~/component/inputform/InputFormComponent";
+import ImageProgress                        from "react-native-image-progress";
+import Progress                     from 'react-native-progress/Bar';
 class HomePage extends Component {
   presenter                 = new HomePresenter(this);
 
@@ -129,7 +131,17 @@ class HomePage extends Component {
                       imageUrl : item?.imageUrl
                     })}
                    >
-                      <Image style={HomeStyle.slideImage} source={{uri: item?.imageUrl}}/>
+                      {/* <Image style={HomeStyle.slideImage} source={{uri: item?.imageUrl}}/> */}
+                      <ImageProgress 
+                        source={{uri: item?.imageUrl}} 
+                        indicator={Progress}
+                        indicatorProps={{
+                          size: 80,
+                          borderWidth: 0,
+                          color: 'rgba(150, 150, 150, 1)',
+                          unfilledColor: 'rgba(200, 200, 200, 0.2)'
+                        }}
+                        style={HomeStyle.slideImage}/>
                     </TouchableOpacity>
                   }
                 }
