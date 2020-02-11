@@ -24,22 +24,19 @@ class InputFormComponent extends Component {
     navigation  : PropTypes.object
   };
 
-  register() {
-    this.presenter.register();
-  }
-
   render() {
     const { 
-      isChecked, 
-      name, 
-      phone, 
+      nama,
+      no_hp,
       email,
-      address,
-      ktp, 
-      pin
+      alamat,
+      no_ktp,
+      cabang
     }            = this.state;
-    const { navigation }  = this.props;
     const cabangData = [
+        {
+            value : "-Pilih Cabang-"
+        },
         {
             value : "Balaraja"
         },
@@ -71,8 +68,8 @@ class InputFormComponent extends Component {
               ref={ref => this.textName = ref }
               style={InputFormStyle.nameTextInput}
               placeholder={"Nama"}
-              value={name}
-              onChangeText={value => this.setState({ name : value })}
+              value={nama}
+              onChangeText={value => this.setState({ nama : value })}
             />
             <View style={InputFormStyle.phoneView}>
               <View style={InputFormStyle.prefixView}>
@@ -84,16 +81,16 @@ class InputFormComponent extends Component {
                 keyboardType="numeric"
                 style={InputFormStyle.phoneNumberTextInput} 
                 placeholder={"No. HP"}
-                value={phone}
-                onChangeText={value => this.setState({ phone : value })}
+                value={no_hp}
+                onChangeText={value => this.setState({ no_hp : value })}
               />
             </View>
             <TextInput 
               ref={ref => this.textAddress = ref }
               style={InputFormStyle.nameTextInput}
               placeholder={"Alamat"}
-              value={address}
-              onChangeText={value => this.setState({ address : value })}
+              value={alamat}
+              onChangeText={value => this.setState({ alamat : value })}
             />
             <TextInput 
               ref={ref => this.textEmail = ref }
@@ -107,17 +104,17 @@ class InputFormComponent extends Component {
               keyboardType="numeric"
               style={InputFormStyle.nameTextInput}
               placeholder={"No. KTP"}
-              value={ktp}
-              onChangeText={value => this.setState({ ktp : value })}
+              value={no_ktp}
+              onChangeText={value => this.setState({ no_ktp : value })}
             />
             <Picker
-            selectedValue={this.state.language}
+            selectedValue={this.state.cabang}
             // style={{height: 50, width: 100}}
             onValueChange={(itemValue, itemIndex) =>
-                this.setState({language: itemValue})
+                this.setState({cabang: itemValue})
             }>
                 {
-                    cabangData?.map((item, key) => <Picker.Item key label={item?.value} value={item?.value} />)
+                    cabangData?.map((item, key) => <Picker.Item key={key} label={item?.value} value={item?.value} />)
                 }
             </Picker>
             
@@ -130,7 +127,7 @@ class InputFormComponent extends Component {
           </TouchableOpacity>
           <TouchableOpacity 
             style={InputFormStyle.registerButton}
-            onPress={this.register.bind(this)}
+            onPress={() => this.presenter.submitData()}
           >
             <Text style={InputFormStyle.registerText}>{"Kirim"}</Text>
           </TouchableOpacity>
