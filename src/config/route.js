@@ -1,7 +1,6 @@
 import React                        from "react";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import HomePage                     from "~/pages/home/HomePage";
-import InputFormPage                     from "~/pages/inputform/InputFormPage";
 
 export const config  = {
   initialRouteName : "HomePage"
@@ -19,6 +18,5 @@ export const route = {
       return MainPage[currentRoute.key].navigationOptions({ navigation }); 
     }
   },
-  HomePage,
-  InputFormPage
+  HomePage
 };
