@@ -47,7 +47,7 @@ class HomePage extends Component {
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.onBackButtonPressed.bind(this));
     this.closeViewer();
-    this.generateHashImage()
+    this.generateHashImage();
   }
 
   componentWillUnmount() {

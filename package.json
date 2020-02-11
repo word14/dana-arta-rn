@@ -16,6 +16,7 @@
     "react-native-keyboard-spacer": "^0.4.1",
     "react-native-material-dropdown": "^0.11.1",
     "react-native-progress": "^4.0.3",
+    "react-native-simple-toast": "^1.0.0",
     "react-native-snap-carousel": "^3.8.4",
     "react-navigation": "^3.0.9",
     "react-navigation-tabs": "^1.0.2",
