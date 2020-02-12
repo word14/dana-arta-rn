@@ -77,7 +77,7 @@ export default StyleSheet.create({
   },
   slideImage : {
     borderRadius : 8,
-    width         : width,
-    height        : height
+    width         : "100%",
+    height        : "100%"
   }
 });
