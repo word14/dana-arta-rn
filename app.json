@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "base",
+    "name": "Dana Arta",
     "slug": "base",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -27,7 +27,12 @@
     },
     "android": {
       "package": "com.danaarta.kospindanaarta",
-      "versionCode": 1
+      "versionCode": 1,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyAzEbTPAzcspwDf7QsHauBprJtHm60t3R4"
+        }
+      }
     }
   }
 }
