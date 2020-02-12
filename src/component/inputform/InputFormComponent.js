@@ -28,9 +28,7 @@ class InputFormComponent extends Component {
     const { 
       nama,
       no_hp,
-      email,
       alamat,
-      no_ktp,
       cabang
     }            = this.state;
     const cabangData = [
@@ -46,9 +44,6 @@ class InputFormComponent extends Component {
         {
             value : "Cikupa"
         },
-        // {
-        //     value : "Freetrend"
-        // },
         {
             value : "Jatake"
         },
@@ -92,24 +87,8 @@ class InputFormComponent extends Component {
               value={alamat}
               onChangeText={value => this.setState({ alamat : value })}
             />
-            <TextInput 
-              ref={ref => this.textEmail = ref }
-              style={InputFormStyle.nameTextInput}
-              placeholder={"Email"}
-              value={email}
-              onChangeText={value => this.setState({ email : value })}
-            />
-             <TextInput 
-              ref={ref => this.textKtp = ref }
-              keyboardType="numeric"
-              style={InputFormStyle.nameTextInput}
-              placeholder={"No. KTP"}
-              value={no_ktp}
-              onChangeText={value => this.setState({ no_ktp : value })}
-            />
             <Picker
             selectedValue={this.state.cabang}
-            // style={{height: 50, width: 100}}
             onValueChange={(itemValue, itemIndex) =>
                 this.setState({cabang: itemValue})
             }>
@@ -139,7 +118,7 @@ class InputFormComponent extends Component {
               {
                   fontSize: 20,
                   alignSelf: "center",
-                  marginTop: 20
+                  marginTop: 50
               }
           }>
               WA Kami di:
@@ -148,6 +127,7 @@ class InputFormComponent extends Component {
             <Image source={waIcon} resizeMode="contain" style={{
             height: 50,
             width: 50,
+            marginTop: 10,
             alignSelf : "center"
             }}/>
         </TouchableOpacity>

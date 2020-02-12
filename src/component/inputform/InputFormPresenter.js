@@ -21,18 +21,16 @@ export default class InputFormPresenter extends Presenter {
     const {
       nama,
       no_hp,
-      email,
       alamat,
-      no_ktp,
       cabang
      } = this.state;
     
     response  = await this.inputFormService.insertData({ 
       nama,
-      no_hp : "62" + no_hp,
-      email,
+      no_hp : no_hp ? "62" + no_hp : no_hp,
+      email : "",
       alamat,
-      no_ktp,
+      no_ktp: "",
       cabang : cabang == "-Pilih Cabang-" ? null : cabang
      });
 
@@ -40,9 +38,7 @@ export default class InputFormPresenter extends Presenter {
       this.setState({
         nama : null,
         no_hp : null,
-        email : null,
-        alamat: null,
-        no_ktp : null
+        alamat: null
       });
       Toast.showWithGravity('Data Anda Telah Berhasil Disimpan', Toast.LONG, Toast.TOP)
     } else {

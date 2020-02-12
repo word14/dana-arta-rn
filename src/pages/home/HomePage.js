@@ -132,8 +132,8 @@ class HomePage extends Component {
       }
     ];
     const delta = {
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421
+      latitudeDelta: 0.0022,
+      longitudeDelta: 0.0021
     }
     const waUrl = 'http://api.whatsapp.com/send?phone=6285218170602';
     return (
