@@ -46,9 +46,9 @@ class InputFormComponent extends Component {
         {
             value : "Cikupa"
         },
-        {
-            value : "Freetrend"
-        },
+        // {
+        //     value : "Freetrend"
+        // },
         {
             value : "Jatake"
         },
