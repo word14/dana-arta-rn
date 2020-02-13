@@ -123,7 +123,7 @@ class InputFormComponent extends Component {
           }>
               WA Kami di:
           </Text>
-          <TouchableOpacity onPress={() => Linking.openURL('http://api.whatsapp.com/send?phone=6285218170602')}>
+          <TouchableOpacity onPress={() => Linking.openURL('http://api.whatsapp.com/send?phone=6281586564399')}>
             <Image source={waIcon} resizeMode="contain" style={{
             height: 50,
             width: 50,
