@@ -21,6 +21,7 @@ import InputFormComponent           from "~/component/inputform/InputFormCompone
 import ImageProgress                        from "react-native-image-progress";
 import Progress                     from 'react-native-progress/Bar';
 import MapView, { PROVIDER_GOOGLE, Marker} from "react-native-maps";
+import OpenMap                      from "react-native-open-map";
 
 class HomePage extends Component {
   presenter                 = new HomePresenter(this);
@@ -175,7 +176,10 @@ class HomePage extends Component {
                          position : "absolute",
                          bottom: 100,
                          left: 10
-                       }} onPress={() => navigation.navigate("InputFormPage", {location : item?.location, delta: delta})}>
+                       }} onPress={() => OpenMap.show({
+                        latitude: item?.location?.latitude,
+                        longitude: item?.location?.longitude,
+                      })}>
                         <MapView provider={PROVIDER_GOOGLE}
                       style={{
                         height: height / 4,
