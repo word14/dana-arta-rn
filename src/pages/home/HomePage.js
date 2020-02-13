@@ -7,7 +7,8 @@ import {
   Dimensions,
   TouchableOpacity,
   Linking,
-  Image
+  Image,
+  Animated
 }                                   from "react-native";
 import PropTypes                    from "prop-types";
 import HomePresenter                from "./HomePresenter";
@@ -22,10 +23,14 @@ import ImageProgress                        from "react-native-image-progress";
 import Progress                     from 'react-native-progress/Bar';
 import MapView, { PROVIDER_GOOGLE, Marker} from "react-native-maps";
 import OpenMap                      from "react-native-open-map";
+import Toast from 'react-native-simple-toast';
+const { width, height } = Dimensions.get("window");
 
 class HomePage extends Component {
   presenter                 = new HomePresenter(this);
-
+  state = {
+    backClickCount: 0
+  };
   static navigationOptions  = createNavigationOptions(
     "KOSPIN DANA ARTA",
     (navigation) => ({
@@ -33,7 +38,7 @@ class HomePage extends Component {
       headerRight : <View style={{
         width :128
       }}>
-        <TouchableOpacity onPress={() => Linking.openURL('http://api.whatsapp.com/send?phone=6285218170602')}>
+        <TouchableOpacity onPress={() => Linking.openURL('http://api.whatsapp.com/send?phone=6281586564399')}>
         <Image source={waIcon} resizeMode="contain" style={{
           height: 25,
           width: 25,
@@ -51,6 +56,7 @@ class HomePage extends Component {
     BackHandler.addEventListener("hardwareBackPress", this.onBackButtonPressed.bind(this));
     this.closeViewer();
     this.generateHashImage();
+    this.springValue = new Animated.Value(100) ;
   }
 
   componentWillUnmount() {
@@ -58,8 +64,12 @@ class HomePage extends Component {
   }
 
   onBackButtonPressed() {
-    const { navigation } = this.props;
-    navigation?.pop();
+    if (this.state.backClickCount == 1) {
+      this.setState({backClickCount : 0});
+      BackHandler.exitApp();
+    } else {
+      this._spring();
+    }
     return true;
   }
 
@@ -77,10 +87,20 @@ class HomePage extends Component {
     })
   }
 
+  setResetCount() {
+    this.setState({backClickCount : 0});
+  }
+
+  async _spring() {
+    this.setState({backClickCount: 1}, () => {
+        Toast.showWithGravity('Tekan Sekali Lagi untuk keluar', 1000, Toast.BOTTOM);
+        setTimeout(() => this.setState({backClickCount : 0}), 1500);
+    });
+}
+
   render() {
     const { navigation }  = this.props;
     const { hashImage } = this.state;
-    const { width, height } = Dimensions.get("window");
     const banner = [
       {
         imageUrl : "http://simpanan.danaarta.net/mobileapp/images/f_awal.png?random_number=" + hashImage,
