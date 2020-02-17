@@ -15,6 +15,9 @@ import MapView, { PROVIDER_DEFAULT, Marker } from "react-native-maps";
 import OpenMap from "react-native-open-map";
 import ImageView from "react-native-image-view";
 import waIcon from "@assets/wa-icon.png";
+import { Feather } from "react-native-vector-icons"
+import swatch from "~/config/swatch";
+
 class BranchElementComponent extends Component {
     presenter = new BranchElementPresenter(this);
 
@@ -86,17 +89,19 @@ class BranchElementComponent extends Component {
                         <Text style={BranchElementStyle.restaurantLocationText}>{branchDetail?.city}</Text>
                     </View>
                     <View style={BranchElementStyle.orderNowContainer}>
-                        <TouchableOpacity onPress={() => Linking.openURL('http://api.whatsapp.com/send?phone=6281586564399')}>
-                            <Image source={waIcon} resizeMode="contain" style={{
-                                height: 25,
-                                width: 25,
-                                marginTop: 20
-                            }} />
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.showImage(branchDetail.imageUrl)}
-                            style={{
-                                marginTop: 20
+                        <View style={BranchElementStyle.informationContainer}>
+                            <TouchableOpacity style={{
+                                marginRight: 8
                             }}>
+                                <Feather onPress={() => Linking.openURL('tel:6287786213298')}
+                                    name="phone" size={25} style={BranchElementStyle.iconPhoneView} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => Linking.openURL('http://api.whatsapp.com/send?phone=6287786213298')}>
+                                <Image source={waIcon} resizeMode="contain" style={BranchElementStyle.waView} />
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity onPress={() => this.showImage(branchDetail.imageUrl)}
+                            style={BranchElementStyle.showImageButton}>
                             <Text style={BranchElementStyle.orderNowText}>
                                 {"Lihat Foto"}
                             </Text>

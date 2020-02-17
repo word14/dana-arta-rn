@@ -4,7 +4,9 @@ import swatch from "~/config/swatch";
 export default StyleSheet.create({
     mainView: {
         flex: 1,
-        flexDirection: "column"
+        flexGrow: 1,
+        flexDirection: "column",
+        marginBottom: 50
     },
     touchView: {
         alignSelf: "center"
