@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "base",
+    "name": "Dana Arta",
     "slug": "base",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -12,8 +12,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "http://simpanan.danaarta.net/mobileapp/images/f_splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/f_splash.png",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -27,7 +26,12 @@
     },
     "android": {
       "package": "com.danaarta.kospindanaarta",
-      "versionCode": 1
+      "versionCode": 1,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyAzEbTPAzcspwDf7QsHauBprJtHm60t3R4"
+        }
+      }
     }
   }
 }

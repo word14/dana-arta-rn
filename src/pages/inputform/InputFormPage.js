@@ -16,6 +16,7 @@ import { createNavigationOptions }  from "~/helper/NavigatorHelper";
 import lang                         from "~/lang";
 import swatch                       from "~/config/swatch";
 import KeyboardSpacer      from "react-native-keyboard-spacer";
+import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 
 class InputFormPage extends Component {
   presenter                 = new InputFormPresenter(this);
@@ -27,7 +28,10 @@ class InputFormPage extends Component {
 
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.onBackButtonPressed.bind(this));
-    this.textName.focus();
+    this.setState({
+      location : this.props.navigation.getParam("location"),
+      delta : this.props.navigation.getParam("delta")
+    });
   }
 
   componentWillUnmount() {
@@ -45,113 +49,29 @@ class InputFormPage extends Component {
   }
 
   render() {
-    const { 
-      isChecked, 
-      name, 
-      phone, 
-      email,
-      address,
-      ktp, 
-      pin
-    }            = this.state;
-    const { navigation }  = this.props;
-    const cabangData = [
-        {
-            value : "Balaraja"
-        },
-        {
-            value : "Cengkareng"
-        },
-        {
-            value : "Cikupa"
-        },
-        {
-            value : "Freetrend"
-        },
-        {
-            value : "Jatake"
-        },
-        {
-            value : "Pasar Kemis"
-        },
-        {
-            value : "Selikur"
-        }
-    ]
+    const {location, delta} = this.state;
     return (
       <View style={InputFormStyle.mainView}>
-        <View style={{ flex : 1 }}>
-          <Text style={InputFormStyle.verificationTitleText}>{"Hubungi Kami"}</Text>
-          <View style={InputFormStyle.secondaryView}>
-            <TextInput 
-              ref={ref => this.textName = ref }
-              style={InputFormStyle.nameTextInput}
-              placeholder={"Nama"}
-              value={name}
-              onChangeText={value => this.setState({ name : value })}
+        {location && delta ?
+         <MapView provider={PROVIDER_GOOGLE}
+         style={{
+           height: "100%",
+           width: "100%"
+         }}
+         initialRegion={{
+           latitude: location?.latitude,
+           longitude: location?.longitude,
+           latitudeDelta: delta?.latitudeDelta,
+           longitudeDelta: delta?.longitudeDelta
+         }}>
+            <Marker
+              coordinate={{
+                latitude: location?.latitude,
+                longitude: location?.longitude
+              }}
             />
-            <View style={InputFormStyle.phoneView}>
-              <View style={InputFormStyle.prefixView}>
-                <Text style={InputFormStyle.prefixText}>+62</Text>
-                <View style={InputFormStyle.separatorVertical}></View>
-              </View>
-              <TextInput 
-                ref={ref => this.textNumber = ref }
-                keyboardType="numeric"
-                style={InputFormStyle.phoneNumberTextInput} 
-                placeholder={"No. HP"}
-                value={phone}
-                onChangeText={value => this.setState({ phone : value })}
-              />
-            </View>
-            <TextInput 
-              ref={ref => this.textAddress = ref }
-              style={InputFormStyle.nameTextInput}
-              placeholder={"Alamat"}
-              value={address}
-              onChangeText={value => this.setState({ address : value })}
-            />
-            <TextInput 
-              ref={ref => this.textEmail = ref }
-              style={InputFormStyle.nameTextInput}
-              placeholder={"Email"}
-              value={email}
-              onChangeText={value => this.setState({ email : value })}
-            />
-             <TextInput 
-              ref={ref => this.textKtp = ref }
-              keyboardType="numeric"
-              style={InputFormStyle.nameTextInput}
-              placeholder={"No. KTP"}
-              value={ktp}
-              onChangeText={value => this.setState({ ktp : value })}
-            />
-            <Picker
-            selectedValue={this.state.language}
-            // style={{height: 50, width: 100}}
-            onValueChange={(itemValue, itemIndex) =>
-                this.setState({language: itemValue})
-            }>
-                {
-                    cabangData?.map((item, key) => <Picker.Item key label={item?.value} value={item?.value} />)
-                }
-            </Picker>
-            
-          </View>
-          <TouchableOpacity
-            style={InputFormStyle.agreementView}
-            onPress={() => this.setState({ isChecked : !isChecked })}
-            activeOpacity={0.85}
-          >
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={InputFormStyle.registerButton}
-            onPress={this.register.bind(this)}
-          >
-            <Text style={InputFormStyle.registerText}>{"Kirim"}</Text>
-          </TouchableOpacity>
-        </View>
-        <KeyboardSpacer/>
+            </MapView> : <View/>}
+       
       </View>
     );
   }
