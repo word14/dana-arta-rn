@@ -7,7 +7,7 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         paddingVertical: 15,
-        paddingHorizontal: 20
+        paddingHorizontal: 15
     },
     imageContainer: {
         backgroundColor: "yellow",
@@ -15,9 +15,10 @@ export default StyleSheet.create({
     },
     informationContainer: {
         flex: 1,
-        marginLeft: 20,
         flexDirection: "row",
         justifyContent: "space-between",
+        marginTop: 20,
+        paddingLeft: 10
     },
     restaurantNameText: {
         fontFamily: "AvenirNext-Medium",
@@ -51,7 +52,6 @@ export default StyleSheet.create({
         fontFamily: "AvenirNext-Medium",
         fontSize: 12,
         lineHeight: 16,
-        marginRight: 5,
     },
     orderNowIcon: {
         height: 12,
@@ -61,5 +61,15 @@ export default StyleSheet.create({
         height: "100%",
         width: 80,
         borderRadius: 20
+    },
+    waView: {
+        height: 25,
+        width: 25,
+    },
+    showImageButton: {
+        marginTop: 20
+    },
+    iconPhoneView: {
+        color: swatch.secondaryColor
     }
 });
