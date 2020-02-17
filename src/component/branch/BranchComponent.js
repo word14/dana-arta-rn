@@ -33,7 +33,7 @@ class BranchComponent extends Component {
                         return <View style={BranchStyle.separator} />;
                     }}
                     renderItem={({ item, index }) => {
-                        return <BranchElementComponent branchDetail={item} />;
+                        return <BranchElementComponent key={index} branchDetail={item} />;
                     }}
                 />
             </View>
