@@ -41,12 +41,12 @@ class HomePage extends Component {
     navigation: PropTypes.object
   };
 
-  componentDidMount() {
-    BackHandler.addEventListener("hardwareBackPress", this.onBackButtonPressed.bind(this));
-    this.closeViewer();
-    this.presenter.generateHashImage();
-    this.presenter.getBranch();
-    this.springValue = new Animated.Value(100);
+  async componentDidMount() {
+    await BackHandler.addEventListener("hardwareBackPress", this.onBackButtonPressed.bind(this));
+    await this.closeViewer();
+    await this.presenter.generateHashImage();
+    await this.presenter.getBranch();
+    this.springValue = await new Animated.Value(100);
   }
 
   componentWillUnmount() {
@@ -151,49 +151,16 @@ class HomePage extends Component {
   }
 
   getFirstPage(item) {
-    return <TouchableOpacity
-      activeOpacity={0.85}
-      onPress={() => this.showImage(item.imageUrl)}>
-      <ImageProgress
-        source={{ uri: item?.imageUrl }}
-        indicator={Progress}
-        indicatorProps={{
-          size: 80,
-          borderWidth: 0,
-          color: 'rgba(150, 150, 150, 1)',
-          unfilledColor: 'rgba(200, 200, 200, 0.2)'
-        }}
-        style={HomeStyle.slideImage} />
-      {item?.location ?
-        <TouchableOpacity style={{
-          position: "absolute",
-          bottom: 100,
-          left: 10
-        }} onPress={() => OpenMap.show({
-          latitude: item?.location?.latitude,
-          longitude: item?.location?.longitude,
-        })}>
-          <MapView provider={PROVIDER_GOOGLE}
-            style={{
-              height: height / 4,
-              width: width - 20,
-            }}
-            initialRegion={{
-              latitude: item?.location?.latitude,
-              longitude: item?.location?.longitude,
-              latitudeDelta: delta.latitudeDelta,
-              longitudeDelta: delta.longitudeDelta
-            }}>
-            <Marker
-              coordinate={{
-                latitude: item?.location?.latitude,
-                longitude: item?.location?.longitude
-              }}
-            />
-          </MapView>
-        </TouchableOpacity>
-        : <View />}
-    </TouchableOpacity>;
+    return <ImageProgress
+      source={{ uri: item?.imageUrl }}
+      indicator={Progress}
+      indicatorProps={{
+        size: 80,
+        borderWidth: 0,
+        color: 'rgba(150, 150, 150, 1)',
+        unfilledColor: 'rgba(200, 200, 200, 0.2)'
+      }}
+      style={HomeStyle.slideImage} />;
   }
 
 
