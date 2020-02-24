@@ -53,6 +53,9 @@ class InputFormComponent extends Component {
       },
       {
         value: "Selikur"
+      },
+      {
+        value: "Citra 8"
       }
     ]
     return (

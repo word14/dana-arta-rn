@@ -49,7 +49,7 @@ class BranchElementComponent extends Component {
         return (
             <View
                 style={BranchElementStyle.mainView}>
-                {branchDetail?.location ?
+                {branchDetail.latitude && branchDetail.longitude ?
                     <TouchableOpacity
                         activeOpacity={0.85}
                         style={{
@@ -58,9 +58,13 @@ class BranchElementComponent extends Component {
                     >
                         <MapView provider={PROVIDER_DEFAULT}
                             style={BranchElementStyle.mapsStyle}
+                            onPress={() => OpenMap.show({
+                                latitude: parseFloat(branchDetail?.latitude),
+                                longitude: parseFloat(branchDetail?.longitude),
+                            })}
                             initialRegion={{
-                                latitude: branchDetail?.location?.latitude,
-                                longitude: branchDetail?.location?.longitude,
+                                latitude: parseFloat(branchDetail?.latitude),
+                                longitude: parseFloat(branchDetail?.longitude),
                                 latitudeDelta: delta.latitudeDelta,
                                 longitudeDelta: delta.longitudeDelta
                             }}>
@@ -71,36 +75,35 @@ class BranchElementComponent extends Component {
                                     height: 10
                                 }}
                                 onPress={() => OpenMap.show({
-                                    latitude: branchDetail?.location?.latitude,
-                                    longitude: branchDetail?.location?.longitude,
+                                    latitude: parseFloat(branchDetail?.latitude),
+                                    longitude: parseFloat(branchDetail?.longitude),
                                 })}
                                 coordinate={{
-                                    latitude: branchDetail?.location?.latitude,
-                                    longitude: branchDetail?.location?.longitude
+                                    latitude: parseFloat(branchDetail?.latitude),
+                                    longitude: parseFloat(branchDetail?.longitude)
                                 }}
                             />
                         </MapView>
                     </TouchableOpacity>
                     : <View />}
                 <View style={BranchElementStyle.informationContainer}>
-                    <View>
-                        <Text style={BranchElementStyle.restaurantNameText}>{branchDetail?.name}</Text>
-                        <Text style={BranchElementStyle.restaurantTypeText}>{branchDetail?.address}</Text>
-                        <Text style={BranchElementStyle.restaurantLocationText}>{branchDetail?.city}</Text>
+                    <View style={BranchElementStyle.descView}>
+                        <Text style={BranchElementStyle.restaurantNameText}>{branchDetail?.nama}</Text>
+                        <Text style={BranchElementStyle.restaurantLocationText}>{branchDetail?.alamat}</Text>
                     </View>
                     <View style={BranchElementStyle.orderNowContainer}>
-                        <View style={BranchElementStyle.informationContainer}>
+                        <View style={BranchElementStyle.contactView}>
                             <TouchableOpacity style={{
                                 marginRight: 8
                             }}>
-                                <Feather onPress={() => Linking.openURL('tel:6287786213298')}
+                                <Feather onPress={() => Linking.openURL('tel:' + branchDetail?.no_telp)}
                                     name="phone" size={25} style={BranchElementStyle.iconPhoneView} />
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => Linking.openURL('http://api.whatsapp.com/send?phone=6287786213298')}>
+                            <TouchableOpacity onPress={() => Linking.openURL('http://api.whatsapp.com/send?phone=' + branchDetail?.no_wa)}>
                                 <Image source={waIcon} resizeMode="contain" style={BranchElementStyle.waView} />
                             </TouchableOpacity>
                         </View>
-                        <TouchableOpacity onPress={() => this.showImage(branchDetail.imageUrl)}
+                        <TouchableOpacity onPress={() => this.showImage(branchDetail.images)}
                             style={BranchElementStyle.showImageButton}>
                             <Text style={BranchElementStyle.orderNowText}>
                                 {"Lihat Foto"}
