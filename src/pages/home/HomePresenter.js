@@ -39,4 +39,16 @@ export default class HomePresenter extends Presenter {
       console.log(e);
     }
   }
+
+  async buildBranch() {
+    const { branch } = this.state;
+    var branchData = [];
+    branch.forEach((item, index) => {
+      if (index == 0) {
+        branchData.push("-Pilih Cabang-");
+      }
+      branchData.push(item.nama);
+    });
+    this.setState({ branchData });
+  }
 }
