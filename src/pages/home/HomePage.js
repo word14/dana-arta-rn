@@ -46,6 +46,7 @@ class HomePage extends Component {
     await this.closeViewer();
     await this.presenter.generateHashImage();
     await this.presenter.getBranch();
+    await this.presenter.buildBranch();
     this.springValue = await new Animated.Value(100);
   }
 
@@ -83,7 +84,7 @@ class HomePage extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { hashImage, branch } = this.state;
+    const { hashImage, branch, branchData } = this.state;
     const menu = [
       {
         pageType: "start_page",
@@ -122,7 +123,7 @@ class HomePage extends Component {
                   case "middle_page":
                     return <BranchComponent branch={branch} onPressImage={() => this.showImage(item?.imageUrl)} />;
                   case "end_page":
-                    return <InputFormComponent />;
+                    return <InputFormComponent branchData={branchData} />;
                 }
               }
             }

@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
-  Linking
+  Linking,
+  ScrollView
 } from "react-native";
 import PropTypes from "prop-types";
 import InputFormPresenter from "./InputFormPresenter";
@@ -21,7 +22,8 @@ class InputFormComponent extends Component {
   presenter = new InputFormPresenter(this);
 
   static propTypes = {
-    navigation: PropTypes.object
+    navigation: PropTypes.object,
+    branchData: PropTypes.array
   };
 
   render() {
@@ -29,38 +31,12 @@ class InputFormComponent extends Component {
       nama,
       no_hp,
       alamat,
-      perusahaan,
-      cabang
+      perusahaan
     } = this.state;
-    const cabangData = [
-      {
-        value: "-Pilih Cabang-"
-      },
-      {
-        value: "Balaraja"
-      },
-      {
-        value: "Cengkareng"
-      },
-      {
-        value: "Cikupa"
-      },
-      {
-        value: "Jatake"
-      },
-      {
-        value: "Pasar Kemis"
-      },
-      {
-        value: "Selikur"
-      },
-      {
-        value: "Citra 8"
-      }
-    ]
+    const { branchData } = this.props;
     return (
-      <View style={InputFormStyle.mainView}>
-        <View style={{ flex: 1 }}>
+      <ScrollView style={InputFormStyle.mainView}>
+        <View>
           <Text style={InputFormStyle.verificationTitleText}>{"HUBUNGI KAMI"}</Text>
           <View style={InputFormStyle.secondaryView}>
             <TextInput
@@ -104,7 +80,7 @@ class InputFormComponent extends Component {
                 this.setState({ cabang: itemValue })
               }>
               {
-                cabangData?.map((item, key) => <Picker.Item key={key} label={item?.value} value={item?.value} />)
+                branchData?.map((item, key) => <Picker.Item key={key} label={item} value={item} />)
               }
             </Picker>
 
@@ -145,7 +121,7 @@ class InputFormComponent extends Component {
           {/* </View> */}
         </View>
         <KeyboardSpacer />
-      </View>
+      </ScrollView>
     );
   }
 }
