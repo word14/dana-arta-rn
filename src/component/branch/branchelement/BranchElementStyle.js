@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import swatch from "~/config/swatch";
+const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
     mainView: {
@@ -7,7 +8,8 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         paddingVertical: 15,
-        paddingHorizontal: 20
+        paddingHorizontal: 15,
+        height: height / 7
     },
     imageContainer: {
         backgroundColor: "yellow",
@@ -15,13 +17,18 @@ export default StyleSheet.create({
     },
     informationContainer: {
         flex: 1,
-        marginLeft: 20,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingLeft: 10,
+    },
+    contactView: {
+        paddingTop: 15,
         flexDirection: "row",
         justifyContent: "space-between",
     },
     restaurantNameText: {
         fontFamily: "AvenirNext-Medium",
-        fontSize: 16,
+        fontSize: 14,
         lineHeight: 21,
         textAlign: "left",
         color: swatch.primaryBlack,
@@ -51,7 +58,6 @@ export default StyleSheet.create({
         fontFamily: "AvenirNext-Medium",
         fontSize: 12,
         lineHeight: 16,
-        marginRight: 5,
     },
     orderNowIcon: {
         height: 12,
@@ -61,5 +67,18 @@ export default StyleSheet.create({
         height: "100%",
         width: 80,
         borderRadius: 20
+    },
+    waView: {
+        height: 25,
+        width: 25,
+    },
+    showImageButton: {
+        marginTop: 20
+    },
+    iconPhoneView: {
+        color: swatch.secondaryColor
+    },
+    descView: {
+        width: width / 3
     }
 });

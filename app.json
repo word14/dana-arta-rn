@@ -3,7 +3,7 @@
     "name": "Dana Arta",
     "slug": "base",
     "privacy": "public",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": [
       "ios",
       "android"
@@ -12,8 +12,8 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/f_splash.png",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/splash.png",
+      "backgroundColor": "#f7f7f7"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

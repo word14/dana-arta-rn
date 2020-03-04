@@ -7,7 +7,9 @@ import { Provider } from "react-redux";
 
 export default class App extends React.Component {
 
-  images = [];
+  images = [
+    require("./assets/splash.png")
+  ];
 
   fonts = {
     "AvenirNext-Bold": require("./fonts/AvenirNext-Bold.ttf"),

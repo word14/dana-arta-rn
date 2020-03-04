@@ -41,12 +41,13 @@ class HomePage extends Component {
     navigation: PropTypes.object
   };
 
-  componentDidMount() {
-    BackHandler.addEventListener("hardwareBackPress", this.onBackButtonPressed.bind(this));
-    this.closeViewer();
-    this.presenter.generateHashImage();
-    this.presenter.getBranch();
-    this.springValue = new Animated.Value(100);
+  async componentDidMount() {
+    await BackHandler.addEventListener("hardwareBackPress", this.onBackButtonPressed.bind(this));
+    await this.closeViewer();
+    await this.presenter.generateHashImage();
+    await this.presenter.getBranch();
+    await this.presenter.buildBranch();
+    this.springValue = await new Animated.Value(100);
   }
 
   componentWillUnmount() {
@@ -83,7 +84,7 @@ class HomePage extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { hashImage, branch } = this.state;
+    const { hashImage, branch, branchData } = this.state;
     const menu = [
       {
         pageType: "start_page",
@@ -109,7 +110,6 @@ class HomePage extends Component {
             sliderWidth={width}
             itemWidth={width}
             itemHeight={height}
-            slideStyle={HomeStyle.slideStyle}
             inactiveSlideOpacity={0.3}
             inactiveSlideScale={1}
             activeOpacity={0.85}
@@ -122,7 +122,7 @@ class HomePage extends Component {
                   case "middle_page":
                     return <BranchComponent branch={branch} onPressImage={() => this.showImage(item?.imageUrl)} />;
                   case "end_page":
-                    return <InputFormComponent />;
+                    return <InputFormComponent branchData={branchData} />;
                 }
               }
             }
@@ -151,49 +151,16 @@ class HomePage extends Component {
   }
 
   getFirstPage(item) {
-    return <TouchableOpacity
-      activeOpacity={0.85}
-      onPress={() => this.showImage(item.imageUrl)}>
-      <ImageProgress
-        source={{ uri: item?.imageUrl }}
-        indicator={Progress}
-        indicatorProps={{
-          size: 80,
-          borderWidth: 0,
-          color: 'rgba(150, 150, 150, 1)',
-          unfilledColor: 'rgba(200, 200, 200, 0.2)'
-        }}
-        style={HomeStyle.slideImage} />
-      {item?.location ?
-        <TouchableOpacity style={{
-          position: "absolute",
-          bottom: 100,
-          left: 10
-        }} onPress={() => OpenMap.show({
-          latitude: item?.location?.latitude,
-          longitude: item?.location?.longitude,
-        })}>
-          <MapView provider={PROVIDER_GOOGLE}
-            style={{
-              height: height / 4,
-              width: width - 20,
-            }}
-            initialRegion={{
-              latitude: item?.location?.latitude,
-              longitude: item?.location?.longitude,
-              latitudeDelta: delta.latitudeDelta,
-              longitudeDelta: delta.longitudeDelta
-            }}>
-            <Marker
-              coordinate={{
-                latitude: item?.location?.latitude,
-                longitude: item?.location?.longitude
-              }}
-            />
-          </MapView>
-        </TouchableOpacity>
-        : <View />}
-    </TouchableOpacity>;
+    return <ImageProgress
+      source={{ uri: item?.imageUrl }}
+      indicator={Progress}
+      indicatorProps={{
+        size: 80,
+        borderWidth: 0,
+        color: 'rgba(150, 150, 150, 1)',
+        unfilledColor: 'rgba(200, 200, 200, 0.2)'
+      }}
+      style={HomeStyle.slideImage} />;
   }
 
 

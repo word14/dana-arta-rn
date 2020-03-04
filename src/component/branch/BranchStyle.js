@@ -3,8 +3,7 @@ import swatch from "~/config/swatch";
 
 export default StyleSheet.create({
     mainView: {
-        flex: 1,
-        flexDirection: "column"
+        flex: 1
     },
     touchView: {
         alignSelf: "center"
