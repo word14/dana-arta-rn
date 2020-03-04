@@ -110,7 +110,6 @@ class HomePage extends Component {
             sliderWidth={width}
             itemWidth={width}
             itemHeight={height}
-            slideStyle={HomeStyle.slideStyle}
             inactiveSlideOpacity={0.3}
             inactiveSlideScale={1}
             activeOpacity={0.85}
